@@ -1,7 +1,7 @@
 %define name	wordnet
 %define Name	WordNet
-%define version	2.1
-%define release	%mkrel 5
+%define version	3.0
+%define release	%mkrel 1
 %define major	%{version}
 %define libname	%mklibname %{name} %{major}
 
@@ -13,9 +13,8 @@ Group:		Sciences/Other
 License:	GPL
 URL:		http://wordnet.princeton.edu
 Source0:	http://wordnet.princeton.edu/%{version}/%{Name}-%{version}.tar.bz2
-Patch0:		%{name}-2.1.libtool.patch.bz2
-Patch1:		%{name}-2.1.fhs.patch.bz2
-Patch2:		WordNet-2.1-build.patch.bz2
+Patch0:		%{name}-2.1.libtool.patch
+Patch1:		%{name}-3.0.fhs.patch
 Requires:       %{libname} = %{version}
 BuildRequires:	automake1.8
 BuildRequires:	tcl-devel
@@ -51,7 +50,6 @@ Libraries, include files and other resources you can use to develop.
 %setup -q -n %{Name}-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 libtoolize
