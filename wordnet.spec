@@ -1,7 +1,7 @@
 %define name	wordnet
 %define Name	WordNet
 %define version	3.0
-%define release	%mkrel 4
+%define release	%mkrel 5
 %define major	%{version}
 %define libname	%mklibname %{name} %{major}
 
