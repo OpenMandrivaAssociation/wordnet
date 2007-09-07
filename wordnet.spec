@@ -53,9 +53,7 @@ Libraries, include files and other resources you can use to develop.
 
 %build
 libtoolize
-aclocal-1.8
-autoconf-2.5x
-automake-1.8
+autoreconf
 %configure2_5x
 make
 
