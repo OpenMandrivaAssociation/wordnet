@@ -20,6 +20,7 @@ BuildRequires:	automake1.8
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 BuildRequires:	X11-devel
+BuildRoot:      %{_tmppath}/%{name}-%{version}
 
 %description
 WordNet® is an online lexical reference system whose design is inspired by
