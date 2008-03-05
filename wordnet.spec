@@ -1,13 +1,12 @@
 %define name	wordnet
 %define Name	WordNet
 %define version	3.0
-%define release	%mkrel 5
 %define major	%{version}
 %define libname	%mklibname %{name} %{major}
 
 Name:		%{name}
 Version:	%{version}
-Release:	%{release}
+Release:	%mkrel 6
 Summary:	A lexical database for the english language
 Group:		Sciences/Other
 License:	GPL
