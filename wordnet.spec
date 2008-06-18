@@ -6,7 +6,7 @@
 
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 6
+Release:	%mkrel 7
 Summary:	A lexical database for the english language
 Group:		Sciences/Other
 License:	GPL
