@@ -6,7 +6,7 @@
 
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 8
+Release:	%mkrel 9
 Summary:	A lexical database for the english language
 Group:		Sciences/Other
 License:	GPL
@@ -14,7 +14,7 @@ URL:		http://wordnet.princeton.edu
 Source0:	http://wordnet.princeton.edu/%{version}/%{Name}-%{version}.tar.bz2
 Patch0:		%{name}-2.1.libtool.patch
 Patch1:		%{name}-3.0.fhs.patch
-Patch2:		%{name}-CVE-2008-2149.patch
+Patch2:		%{name}-CVE-2008-2149_3908.patch
 Requires:       %{libname} = %{version}
 BuildRequires:	automake1.8
 BuildRequires:	tcl-devel
