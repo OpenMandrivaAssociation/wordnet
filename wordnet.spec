@@ -1,22 +1,24 @@
-%define name	wordnet
 %define Name	WordNet
-%define version	3.0
-%define major	%{version}
-%define libname	%mklibname %{name} %{major}
 
-Name:		%{name}
-Version:	%{version}
-Release:	%mkrel 9
-Summary:	A lexical database for the english language
+%define major		%{version}
+%define libname		%mklibname %{name} %{major}
+%define develname	%mklibname %{name} -d
+
+Name:		wordnet
+Version:	3.0
+Release:	%{mkrel 10}
+Summary:	A lexical database for the English language
 Group:		Sciences/Other
-License:	GPL
+License:	MIT
 URL:		http://wordnet.princeton.edu
 Source0:	http://wordnet.princeton.edu/%{version}/%{Name}-%{version}.tar.bz2
 Patch0:		%{name}-2.1.libtool.patch
 Patch1:		%{name}-3.0.fhs.patch
 Patch2:		%{name}-CVE-2008-2149_3908.patch
+# Kludge (not a fix) for Tcl 8.6 (TIP #330, interp->result) - AdamW
+# 2008/12
+Patch3:		wordnet-3.0-tcl86.patch
 Requires:       %{libname} = %{version}
-BuildRequires:	automake1.8
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 BuildRequires:	X11-devel
@@ -37,13 +39,14 @@ Provides:       lib%{name} = %{version}-%{release}
 %description -n %{libname}
 This package contains the library needed to run %{name}.
 
-%package -n %{libname}-devel
+%package -n %{develname}
 Summary:        Development header files for %{name}
 Group:          Development/C
 Requires:       %{libname} = %{version}
 Provides:       lib%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname wordnet 3.0 -d}
 
-%description -n %{libname}-devel
+%description -n %{develname}
 Libraries, include files and other resources you can use to develop.
 
 %prep
@@ -51,6 +54,7 @@ Libraries, include files and other resources you can use to develop.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1 -b .tcl86
 
 %build
 libtoolize
@@ -81,11 +85,11 @@ rm -rf %{buildroot}
 %{_datadir}/%{Name}
 %{_mandir}/*/*
 
-%files -n %libname
+%files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/libWN-%{version}.so
 
-%files -n %libname-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_libdir}/libWN.so
 %{_libdir}/libWN.a
