@@ -6,7 +6,7 @@
 
 Name:		wordnet
 Version:	3.0
-Release:	%{mkrel 10}
+Release:	%{mkrel 11}
 Summary:	A lexical database for the English language
 Group:		Sciences/Other
 License:	MIT
@@ -18,6 +18,8 @@ Patch2:		%{name}-CVE-2008-2149_3908.patch
 # Kludge (not a fix) for Tcl 8.6 (TIP #330, interp->result) - AdamW
 # 2008/12
 Patch3:		wordnet-3.0-tcl86.patch
+Patch4:		wordnet_autoconf.patch
+Patch5:		wordnet_wformat.patch
 Requires:       %{libname} = %{version}
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
@@ -55,10 +57,11 @@ Libraries, include files and other resources you can use to develop.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1 -b .tcl86
+%patch4 -p1
+%patch5 -p1
+autoreconf -fi
 
 %build
-libtoolize
-autoreconf
 %configure2_5x
 make
 
