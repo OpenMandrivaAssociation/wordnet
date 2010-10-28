@@ -6,7 +6,7 @@
 
 Name:		wordnet
 Version:	3.0
-Release:	%{mkrel 11}
+Release:	%mkrel 12
 Summary:	A lexical database for the English language
 Group:		Sciences/Other
 License:	MIT
@@ -70,21 +70,25 @@ rm -rf %{buildroot}
 %makeinstall
 chmod 644 %{buildroot}%{_libdir}/libWN.la
 
+mkdir -p %{buildroot}%{_datadir}/applications/
+cat > %{buildroot}%{_datadir}/applications/mandriva-wordnet.desktop << EOF
+[Desktop Entry]
+Type=Application
+Name=WordNet
+Comment=Graphical Interface for WordNet
+Icon=accessories-dictionary
+Exec=wnb
+Categories=Office;X-MandrivaLinux-Office-Accessories;
+EOF
+
 %clean
 rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %files
 %defattr(-,root,root)
 %doc AUTHORS COPYING INSTALL ChangeLog README doc/{html,ps,pdf}
 %{_bindir}/*
+%{_datadir}/applications/mandriva-wordnet.desktop
 %{_datadir}/%{Name}
 %{_mandir}/*/*
 
@@ -98,4 +102,3 @@ rm -rf %{buildroot}
 %{_libdir}/libWN.a
 %{_libdir}/libWN.la
 %{_includedir}/*
-
