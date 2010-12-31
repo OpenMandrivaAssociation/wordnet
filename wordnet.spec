@@ -23,7 +23,6 @@ Patch5:		wordnet_wformat.patch
 Requires:       %{libname} = %{version}
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
-BuildRequires:	X11-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}
 
 %description
