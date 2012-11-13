@@ -1,0 +1,16 @@
+---
+ configure.ac |    1 	1 +	0 -	0 !
+ 1 file changed, 1 insertion(+)
+
+Index: WordNet-3.0/configure.ac
+===================================================================
+--- WordNet-3.0.orig/configure.ac	2009-08-24 05:37:29.000000000 -0400
++++ WordNet-3.0/configure.ac	2009-08-24 05:39:44.000000000 -0400
+@@ -8,6 +8,7 @@ AC_CONFIG_HEADER([config.h])
+ 
+ # Checks for programs.
+ AC_PROG_CC
++AM_PROG_CC_C_O
+ AC_PROG_LIBTOOL
+ AC_PROG_INSTALL
+ 
