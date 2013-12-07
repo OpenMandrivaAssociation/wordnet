@@ -6,7 +6,7 @@
 
 Name:		wordnet
 Version:	3.0
-Release:	16
+Release:	17
 Summary:	A lexical database for the English language
 Group:		Sciences/Other
 License:	MIT
