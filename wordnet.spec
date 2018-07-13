@@ -21,6 +21,10 @@ Patch3:		wordnet-3.0-tcl86.patch
 Patch4:		wordnet_autoconf.patch
 Patch5:		wordnet_wformat.patch
 Requires:	%{libname} = %{version}
+BuildRequires:	pkgconfig(fontconfig)
+BuildRequires:	pkgconfig(xext)
+BuildRequires:	pkgconfig(xft)
+BuildRequires:	pkgconfig(xscrnsaver)
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 
