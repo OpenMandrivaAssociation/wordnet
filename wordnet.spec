@@ -1,17 +1,18 @@
 %define Name WordNet
 
-%define major %{version}
+%define major 3.0
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Name:		wordnet
-Version:	3.0
-Release:	24
+Version:	3.1
+Release:	1
 Summary:	A lexical database for the English language
 Group:		Sciences/Other
 License:	MIT
 URL:		http://wordnet.princeton.edu
-Source0:	http://wordnet.princeton.edu/%{version}/%{Name}-%{version}.tar.bz2
+Source0:	http://wordnet.princeton.edu/3.0/%{Name}-3.0.tar.bz2
+Source1:	http://wordnetcode.princeton.edu/wn%{version}.dict.tar.gz
 Patch0:		%{name}-2.1.libtool.patch
 Patch1:		%{name}-3.0.fhs.patch
 Patch2:		%{name}-CVE-2008-2149_3908.patch
@@ -54,21 +55,18 @@ Obsoletes:	%{mklibname wordnet 3.0 -d}
 Libraries, include files and other resources you can use to develop.
 
 %prep
-%setup -q -n %{Name}-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1 -b .tcl86
-%patch4 -p1
-%patch5 -p1
+%autosetup -p1 -n %{Name}-3.0
 autoreconf -fi
+rm -f dict/*3.0*
+sed -i -e 's,3\.0,3.1,g' dict/Makefile.am
+tar xf %{S:1}
 
 %build
 %configure
-make
+%make_build
 
 %install
-%makeinstall
+%make_install
 
 mkdir -p %{buildroot}%{_datadir}/applications/
 cat > %{buildroot}%{_datadir}/applications/wordnet.desktop << EOF
@@ -90,7 +88,7 @@ EOF
 %{_mandir}/*/*
 
 %files -n %{libname}
-%{_libdir}/libWN-%{version}.so
+%{_libdir}/libWN-3.0.so
 
 %files -n %{develname}
 %{_libdir}/libWN.so
