@@ -10,7 +10,7 @@ Release:	3
 Summary:	A lexical database for the English language
 Group:		Sciences/Other
 License:	MIT
-URL:		http://wordnet.princeton.edu
+URL:		https://wordnet.princeton.edu
 Source0:	http://wordnet.princeton.edu/3.0/%{Name}-3.0.tar.bz2
 Source1:	http://wordnetcode.princeton.edu/wn%{version}.dict.tar.gz
 Patch0:		%{name}-2.1.libtool.patch
