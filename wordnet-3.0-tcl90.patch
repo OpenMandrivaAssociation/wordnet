@@ -1,0 +1,179 @@
+diff -up WordNet-3.0/src/stubs.c.omv~ WordNet-3.0/src/stubs.c
+--- WordNet-3.0/src/stubs.c.omv~	2025-03-22 01:38:08.956875014 +0100
++++ WordNet-3.0/src/stubs.c	2025-03-22 01:47:09.380853843 +0100
+@@ -42,8 +42,7 @@ int wn_findvalidsearches (ClientData cli
+    char *morph;
+    int pos;
+    if (argc != 3) {
+-      interp -> result = 
+-         "usage: findvalidsearches searchword partofspeechnum";
++      Tcl_SetResult(interp, "usage: findvalidsearches searchword partofspeechnum", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    pos = atoi (argv[2]);
+@@ -54,7 +53,7 @@ int wn_findvalidsearches (ClientData cli
+       } while ((morph = morphstr (NULL, pos)) != NULL);
+    }
+    sprintf (bitfieldstr, "%u", bitfield);
+-   interp -> result = bitfieldstr;
++   Tcl_SetResult(interp, bitfieldstr, TCL_VOLATILE);
+    return TCL_OK;
+ }
+ 
+@@ -71,13 +70,13 @@ int wn_bit (ClientData clientData, Tcl_I
+    static char bitfieldstr[32];
+    int whichbit;
+    if (argc != 2) {
+-      interp -> result = "usage: bit bitnum";
++      Tcl_SetResult(interp, "usage: bit bitnum", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    whichbit = atoi (argv[1]);
+    bitfield = bit (whichbit);
+    sprintf (bitfieldstr, "%u", bitfield);
+-   interp -> result = bitfieldstr;
++   Tcl_SetResult(interp, bitfieldstr, TCL_VOLATILE);
+    return TCL_OK;
+ } 
+ 
+@@ -91,8 +90,7 @@ int wn_search (ClientData clientData, Tc
+    int pos, searchtype, sense;
+    char *morph;
+    if (argc != 5) {
+-      interp -> result = 
+-         "usage: search searchword partofspeechnum searchtypenum sensenum";
++      Tcl_SetResult(interp, "usage: search searchword partofspeechnum searchtypenum sensenum", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    pos = atoi (argv[2]);
+@@ -104,7 +102,7 @@ int wn_search (ClientData clientData, Tc
+          strcat (resultbuf, findtheinfo (morph, pos, searchtype, sense));
+       } while ((morph = morphstr (NULL, pos)) != NULL);
+    }
+-   interp -> result = resultbuf;
++   Tcl_SetResult(interp, resultbuf, TCL_VOLATILE);
+    return TCL_OK;
+ }
+ 
+@@ -116,7 +114,7 @@ int wn_search (ClientData clientData, Tc
+ int wn_glosses (ClientData clientData, Tcl_Interp *interp,
+    int argc, char *argv[]) {
+    if (argc != 2) {
+-      interp -> result = "usage: glosses [1 | 0]";
++      Tcl_SetResult(interp, "usage: glosses [1 | 0]", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    dflag = atoi (argv[1]);
+@@ -131,7 +129,7 @@ int wn_glosses (ClientData clientData, T
+ int wn_fileinfo (ClientData clientData, Tcl_Interp *interp,
+    int argc, char *argv[]) {
+    if (argc != 2) {
+-      interp -> result = "usage: fileinfo [1 | 0]";
++      Tcl_SetResult(interp, "usage: fileinfo [1 | 0]", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    fileinfoflag = atoi (argv[1]);
+@@ -146,7 +144,7 @@ int wn_fileinfo (ClientData clientData,
+ int wn_byteoffset (ClientData clientData, Tcl_Interp *interp,
+    int argc, char *argv[]) {
+    if (argc != 2) {
+-      interp -> result = "usage: byteoffset [1 | 0]";
++      Tcl_SetResult(interp, "usage: byteoffset [1 | 0]", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    offsetflag = atoi (argv[1]);
+@@ -161,7 +159,7 @@ int wn_byteoffset (ClientData clientData
+ int wn_senseflag (ClientData clientData, Tcl_Interp *interp,
+    int argc, char *argv[]) {
+    if (argc != 2) {
+-      interp -> result = "usage: senseflag [1 | 0]";
++      Tcl_SetResult(interp, "usage: senseflag [1 | 0]", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    wnsnsflag = atoi (argv[1]);
+@@ -177,12 +175,12 @@ int wn_contextualhelp (ClientData client
+    int argc, char *argv[]) {
+    int pos, searchtype;
+    if (argc != 3) {
+-      interp -> result = "usage: contextualhelp partofspeechnum searchtypenum";
++      Tcl_SetResult(interp, "usage: contextualhelp partofspeechnum searchtypenum", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    pos = atoi (argv[1]);
+    searchtype = atoi (argv[2]);
+-   interp -> result = helptext[pos][searchtype];
++   Tcl_SetResult(interp, helptext[pos][searchtype], TCL_VOLATILE);
+    return TCL_OK;
+ }
+ 
+@@ -192,7 +190,7 @@ int wn_contextualhelp (ClientData client
+ int wn_reopendb (ClientData clientData, Tcl_Interp *interp,
+    int argc, char *argv[]) {
+    if (argc != 1) {
+-      interp -> result = "usage: reopendb";
++      Tcl_SetResult(interp, "usage: reopendb", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    re_wninit ();
+@@ -206,7 +204,7 @@ int wn_reopendb (ClientData clientData,
+ int wn_abortsearch (ClientData clientData, Tcl_Interp *interp,
+    int argc, char *argv[]) {
+    if (argc != 1) {
+-      interp -> result = "usage: abortsearch";
++      Tcl_SetResult(interp, "usage: abortsearch", TCL_VOLATILE);
+       return TCL_ERROR;
+    }
+    abortsearch = 1;
+diff -up WordNet-3.0/src/tkAppInit.c.omv~ WordNet-3.0/src/tkAppInit.c
+--- WordNet-3.0/src/tkAppInit.c.omv~	2025-03-22 01:36:22.969237043 +0100
++++ WordNet-3.0/src/tkAppInit.c	2025-03-22 01:37:49.694396308 +0100
+@@ -28,8 +28,8 @@ int *tclDummyMathPtr = (int *) matherr;
+ #endif
+ 
+ #ifdef TK_TEST
+-extern int		Tcltest_Init _ANSI_ARGS_((Tcl_Interp *interp));
+-extern int		Tktest_Init _ANSI_ARGS_((Tcl_Interp *interp));
++extern int		Tcltest_Init (Tcl_Interp *interp);
++extern int		Tktest_Init (Tcl_Interp *interp);
+ #endif /* TK_TEST */
+ 
+ /*
+@@ -50,9 +50,7 @@ extern int		Tktest_Init _ANSI_ARGS_((Tcl
+  */
+ 
+ int
+-main(argc, argv)
+-    int argc;			/* Number of command-line arguments. */
+-    char **argv;		/* Values of command-line arguments. */
++main(int argc, char **argv)
+ {
+     /*
+      * The following #if block allows you to change the AppInit
+@@ -64,7 +62,7 @@ main(argc, argv)
+ #ifndef TK_LOCAL_APPINIT
+ #define TK_LOCAL_APPINIT Tcl_AppInit    
+ #endif
+-    extern int TK_LOCAL_APPINIT _ANSI_ARGS_((Tcl_Interp *interp));
++    extern int TK_LOCAL_APPINIT (Tcl_Interp *interp);
+     
+     /*
+      * The following #if block allows you to change how Tcl finds the startup
+@@ -73,7 +71,7 @@ main(argc, argv)
+      */
+     
+ #ifdef TK_LOCAL_MAIN_HOOK
+-    extern int TK_LOCAL_MAIN_HOOK _ANSI_ARGS_((int *argc, char ***argv));
++    extern int TK_LOCAL_MAIN_HOOK (int *argc, char ***argv);
+     TK_LOCAL_MAIN_HOOK(&argc, &argv);
+ #endif
+ 
+@@ -107,8 +105,7 @@ main(argc, argv)
+ extern int Wordnet_Init(Tcl_Interp *interp);
+ 
+ int
+-Tcl_AppInit(interp)
+-    Tcl_Interp *interp;		/* Interpreter for application. */
++Tcl_AppInit(Tcl_Interp *interp)
+ {
+     if (Tcl_Init(interp) == TCL_ERROR) {
+ 	return TCL_ERROR;
