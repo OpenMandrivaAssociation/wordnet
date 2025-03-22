@@ -1,12 +1,13 @@
 %define Name WordNet
 
 %define major 3.0
-%define libname %mklibname %{name} %{major}
+%define oldlibname %mklibname %{name} 3.0
+%define libname %mklibname %{name}
 %define develname %mklibname %{name} -d
 
 Name:		wordnet
 Version:	3.1
-Release:	4
+Release:	5
 Summary:	A lexical database for the English language
 Group:		Sciences/Other
 License:	MIT
@@ -46,6 +47,7 @@ synonym sets.
 Summary:	Main library for %{name}
 Group:		System/Libraries
 Provides:	lib%{name} = %{EVRD}
+%rename %{oldlibname}
 
 %description -n %{libname}
 This package contains the library needed to run %{name}.
@@ -59,6 +61,14 @@ Obsoletes:	%{mklibname wordnet 3.0 -d}
 
 %description -n %{develname}
 Libraries, include files and other resources you can use to develop.
+
+%package gui
+Summary:	Graphical UI for accessing WordNet
+Group:		Sciences/Other
+Requires:	%{libname} = %{EVRD}
+
+%description gui
+Graphical UI for accessing WordNet
 
 %prep
 %autosetup -p1 -n %{Name}-3.0
@@ -88,10 +98,19 @@ EOF
 
 %files
 %doc AUTHORS COPYING INSTALL ChangeLog README doc/{html,ps,pdf}
-%{_bindir}/*
+%{_bindir}/wn
 %{_datadir}/applications/wordnet.desktop
 %{_datadir}/%{Name}
-%{_mandir}/*/*
+%{_mandir}/man1/grind.1*
+%{_mandir}/man1/wn.1*
+%{_mandir}/man1/wnintro.1*
+%{_mandir}/man5/*.5*
+%{_mandir}/man7/*.7*
+
+%files gui
+%{_bindir}/wishwn
+%{_bindir}/wnb
+%{_mandir}/man1/wnb.1*
 
 %files -n %{libname}
 %{_libdir}/libWN.so.*
@@ -99,3 +118,4 @@ EOF
 %files -n %{develname}
 %{_libdir}/libWN.so
 %{_includedir}/*
+%{_mandir}/man3/*.3*
